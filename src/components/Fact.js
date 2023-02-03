@@ -3,7 +3,7 @@ const Fact = ({data}) => {
 
     return (
         <div>
-            <img src={flag} height='150' width='300' alt=""/>
+            <img src={flag} alt=""/>
             <p>{text}</p>
 
         </div>

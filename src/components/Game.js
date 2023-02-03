@@ -1,6 +1,7 @@
 import { useState, useEffect} from 'react'
 import Fact from "./Fact";
 
+
 const Game = () => {
   
   const [country, setCountry] = useState([])
@@ -37,7 +38,6 @@ const Game = () => {
     const rndCountry = country[rndNbr]        // generate random country from all the countries
     
     setRandCountry(rndCountry)
-    console.log(rndCountry)
     console.log(rndCountry.name.common)
     let [firstKey] = Object.keys(rndCountry.currencies) // access first item in currencies object
     const populationInt = Number(rndCountry.population) // string to Number
@@ -82,10 +82,9 @@ const Game = () => {
 
   return (
     <div>
-    <button type="button" onClick={handleClick}>Random country</button>
+    <button type="button" onClick={handleClick}>Start</button>
     <Fact data={data}></Fact>
-    <p>What is this country?</p>
-    <input value={userInput} onChange={handleUserInput} />
+    <input value={userInput} onChange={handleUserInput} placeholder="Enter the name of the country"/>
     
     <button onClick={checkCorrect}>Submit</button>
     </div>

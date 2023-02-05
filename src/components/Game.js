@@ -2,6 +2,9 @@ import { useState, useEffect} from 'react'
 import Select from 'react-select'
 import Fact from "./Fact";
 
+import WinStreakDisplay from './WinStreakDisplay';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Button, ButtonGroup, Container } from 'react-bootstrap';
 
 const Game = () => {
   
@@ -30,6 +33,8 @@ const Game = () => {
         label: countryList[i].name.common
         })
     }
+    countryArray.sort((a, b) => a.value.localeCompare(b.value)) // sort array alphabetically by value
+    console.log(countryArray)
     setSuggestionCountry(countryArray)
     
     
@@ -94,24 +99,21 @@ const Game = () => {
   
 
   return (
+    
     <div>
-    <button type="button" onClick={handleClick}>Start</button>
+    <Container>
+    <Button type="button" onClick={handleClick}>Start</Button>
     <Fact data={data}></Fact>
     <Select options={suggestionCountry}  onChange={handleUserInput} placeholder="Enter country"></Select>
-    <button onClick={checkCorrect}>Submit</button>
+    <Button onClick={checkCorrect}>Submit</Button>
     <WinStreakDisplay winstreakCounter={winstreakCounter}></WinStreakDisplay>
+    </Container>
     </div>
+    
+    
 
   )
 }
 
-const WinStreakDisplay = (props) => {
-  if (props.winstreakCounter>=1) {
-    return (
-      <div>
-        <p>Current winstreak at {props.winstreakCounter}.</p>
-      </div>
-    )
-  }
-}
+
 export default Game

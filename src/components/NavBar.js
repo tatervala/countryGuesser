@@ -3,7 +3,7 @@ import Game from "./Game"
 import Info from "./Info"
 import {
   BrowserRouter as Router,
-  Routes, Route, Link
+  Routes, Route, Link, Navigate
 } from 'react-router-dom'
 const NaviBar = () => {
     const padding = {
@@ -12,12 +12,13 @@ const NaviBar = () => {
     return (
         <Router>
       <div>
-        <Link style={padding} to={"/"}>Game</Link>
+        <Link style={padding} to={"/game"}>Game</Link>
         <Link style={padding} to={"/info"}>Info</Link>
       </div>
       <Routes>
       <Route path="/info" element={<Info />} />
-      <Route path="/" element={<Game />} />
+      <Route path="/" element={<Navigate to="/game" />} />
+      <Route path="/game" element={<Game />} />
       </Routes>
     </Router>
     )

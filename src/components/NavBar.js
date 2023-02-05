@@ -18,6 +18,7 @@ const NaviBar = () => {
       <Routes>
       <Route path="/info" element={<Info />} />
       <Route path="/" element={<Navigate to="/game" />} />
+      <Route path="/countryGuesser" element={<Navigate to="/game" />} />
       <Route path="/game" element={<Game />} />
       </Routes>
     </Router>

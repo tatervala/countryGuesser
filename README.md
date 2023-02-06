@@ -1,4 +1,4 @@
-# [Game found at](https://tatervala.github.io/countryGuesser/)
+# [Game found here](https://tatervala.github.io/countryGuesser/)
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

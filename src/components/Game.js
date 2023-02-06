@@ -1,10 +1,11 @@
 import { useState, useEffect} from 'react'
 import Select from 'react-select'
 import Fact from "./Fact";
-
+import SuccessAlert from './Success';
+import FailAlert from './Fail';
 import WinStreakDisplay from './WinStreakDisplay';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Button, ButtonGroup, Container } from 'react-bootstrap';
+import { Button, Container, Alert } from 'react-bootstrap';
 
 const Game = () => {
   
@@ -73,27 +74,56 @@ const Game = () => {
   const handleUserInput = (event) => { 
     setUserInput(event.value)       // taking the users input and setting the state
   }
+
   const checkCorrect = () => {            // check for correct country
     if(userInput === ""){                 // empty submit not allowed
       alert("Please enter country name")
+      
     }
     else if(randCountry.name.common  === userInput) {    // userinput is correct 
-      alert("Correct! Generating new country...")
+      
       incByOne()
       generateRandom()
+      
       
     } else {alert("Incorrect, try again")                 // if wrong country, keep guessing
       if (winstreakCounter > 0) {
         setWinStreakCounter(winstreakCounter = 0)
       }
+      return(
+        <FailAlert></FailAlert>
+      )
   }
     setUserInput("")
     
   }
+
+  const nextClue = () => {
+
+  }
+
   const incByOne = () => {
     setWinStreakCounter(winstreakCounter = winstreakCounter+1)
     console.log(winstreakCounter)
   }
+
+  const customStyles = {
+    control: base => ({
+      ...base,
+      height: 35,
+      width: 500,
+      marginBottom: 10    })
+  }
+  const buttonStyle = {
+    control: base => ({
+      ...base,
+      height: 35,
+      width: 100,
+      margin: 5    })
+  }
+
+  
+  
   
 
   
@@ -102,10 +132,13 @@ const Game = () => {
     
     <div>
     <Container>
-    <Button type="button" onClick={handleClick}>Start</Button>
+    <Button  onClick={handleClick}>Start</Button>
     <Fact data={data}></Fact>
-    <Select options={suggestionCountry}  onChange={handleUserInput} placeholder="Enter country"></Select>
-    <Button onClick={checkCorrect}>Submit</Button>
+    <Select styles={customStyles} options={suggestionCountry}  onChange={handleUserInput} placeholder="Enter country"></Select>
+    <Button styles={buttonStyle} onClick={checkCorrect}>Submit</Button>
+    <Button style={{margin: 5}}  onClick={nextClue}>Next clue</Button>
+    <SuccessAlert></SuccessAlert>
+    <FailAlert></FailAlert>
     <WinStreakDisplay winstreakCounter={winstreakCounter}></WinStreakDisplay>
     </Container>
     </div>

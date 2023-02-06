@@ -1,9 +1,11 @@
 const Fact = ({data}) => {
     const {flag, text} = data
-
+    const customStyle = {
+        marginTop: 10
+    }
     return (
         <div>
-            <img src={flag} height={"300"} width={"500"} alt=""/>
+            <img style={customStyle} src={flag} height={"300"} width={"500"} alt=""/>
             <p>{text}</p>
 
         </div>

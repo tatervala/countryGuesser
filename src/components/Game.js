@@ -83,14 +83,16 @@ const Game = () => {
       
     }
     else if(randCountry.name.common  === userInput) {    // userinput is correct 
-      
+      alert("Correct, generating next country...")
       incByOne()
       generateRandom()
+
       
       
     } else {alert("Incorrect, try again")                 // if wrong country, keep guessing
       if (winstreakCounter > 0) {
         setWinStreakCounter(winstreakCounter = 0)
+        alert("Incorrect, try again")
       }
       return(
         <FailAlert></FailAlert>
@@ -134,8 +136,7 @@ const Game = () => {
     <Fact data={data}></Fact>
     <Select styles={customStyles} options={suggestionCountry}  onChange={handleUserInput} placeholder="Enter country"></Select>
     <Button styles={buttonStyle} onClick={checkCorrect}>Submit</Button>
-    <SuccessAlert></SuccessAlert>
-    <FailAlert></FailAlert>
+    
     <WinStreakDisplay winstreakCounter={winstreakCounter}></WinStreakDisplay>
     </Container>
     </div>

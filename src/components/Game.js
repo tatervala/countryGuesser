@@ -2,6 +2,7 @@ import { useState, useEffect} from 'react'
 import Select from 'react-select'
 import Fact from "./Fact";
 import SuccessAlert from './Success';
+
 import FailAlert from './Fail';
 import WinStreakDisplay from './WinStreakDisplay';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -14,6 +15,7 @@ const Game = () => {
   const [randCountry, setRandCountry] = useState([])
   const [userInput, setUserInput] = useState("")
   let [winstreakCounter, setWinStreakCounter] = useState(0)
+  let [factCounter, setFactCounter] = useState(0)
   
   
   const [data, setData] = useState({
@@ -35,7 +37,6 @@ const Game = () => {
         })
     }
     countryArray.sort((a, b) => a.value.localeCompare(b.value)) // sort array alphabetically by value
-    console.log(countryArray)
     setSuggestionCountry(countryArray)
     
     
@@ -61,14 +62,15 @@ const Game = () => {
     const formattedPopulation = roundedPop.toLocaleString() // format the population for easier reading
     console.log(rndCountry)
     const factsArray = [                                // array of facts in order 
-      `The capital of this country is ${rndCountry.capital}.\n`,
+      `The capital of this country is ${rndCountry.capital}.`,
       `The population of this country is roughly ${formattedPopulation}.`,
       `This country is located in ${rndCountry.region}.`,
       //`The currency code of this country is ${firstKey}.`
     ]
-    const rndFactNbr = Math.floor(Math.random() * 3)
+    let quizArray = factsArray.join('\r\n')
+    
     setData({flag: rndCountry.flags.png,
-    text: factsArray[rndFactNbr]})
+    text: quizArray})
 
   }
   const handleUserInput = (event) => { 
@@ -96,10 +98,6 @@ const Game = () => {
   }
     setUserInput("")
     
-  }
-
-  const nextClue = () => {
-
   }
 
   const incByOne = () => {
@@ -132,11 +130,10 @@ const Game = () => {
     
     <div>
     <Container>
-    <Button  onClick={handleClick}>Start</Button>
+    <Button style={{marginTop: 5}} onClick={handleClick}>Start</Button>
     <Fact data={data}></Fact>
     <Select styles={customStyles} options={suggestionCountry}  onChange={handleUserInput} placeholder="Enter country"></Select>
     <Button styles={buttonStyle} onClick={checkCorrect}>Submit</Button>
-    <Button style={{margin: 5}}  onClick={nextClue}>Next clue</Button>
     <SuccessAlert></SuccessAlert>
     <FailAlert></FailAlert>
     <WinStreakDisplay winstreakCounter={winstreakCounter}></WinStreakDisplay>

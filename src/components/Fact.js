@@ -6,7 +6,7 @@ const Fact = ({data}) => {
     return (
         <div>
             <img style={customStyle} src={flag} height={"300"} width={"500"} alt=""/>
-            <p>{text}</p>
+            <div>{text}</div>
 
         </div>
     )

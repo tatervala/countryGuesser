@@ -3,7 +3,7 @@ import Alert from 'react-bootstrap/Alert';
 
 const FailAlert = () => {
     return (
-        <Alert variant={'danger'}>Incorrect!</Alert>
+        <Alert style={{width: 500}} variant={'danger'}>Incorrect!</Alert>
         )
 
 }

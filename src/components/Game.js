@@ -25,21 +25,27 @@ const Game = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      
-      const data = await fetch("https://restcountries.com/v3.1/all") // get country data from api
-      const cntr = await data.json()    // to json format
-      setCountry(cntr)
-      let countryList = Object.keys(cntr).map((k) => cntr[k])
-      let countryArray = [] // empty array to hold all the country names
-      for (let i = 0; i < countryList.length; i++) { // loop through the object and push the names to the empty list
-        countryArray.push({value: countryList[i].name.common,
-        label: countryList[i].name.common
-        })
-    }
-    countryArray.sort((a, b) => a.value.localeCompare(b.value)) // sort array alphabetically by value
-    setSuggestionCountry(countryArray)
-    
-    
+
+      /* asynchronous function to fetch the country data from restcountries api
+         wait for the api to load first, then set the state of the array of objects
+         Empty array is created for the predictive suggestion component to hold all the
+         possible country names 
+      */
+
+      const data = await fetch("https://restcountries.com/v3.1/all") // 
+      .then((response) => response.json())
+      .then((cntr) => {
+        setCountry(cntr)
+        let countryList = Object.keys(cntr).map((k) => cntr[k])
+        let countryArray = [] // empty array to hold all the country names for the predictive suggestion component
+        for (let i = 0; i < countryList.length; i++) { // loop through the object and push the names to the empty list
+          countryArray.push({value: countryList[i].name.common,
+          label: countryList[i].name.common
+          })
+      }
+      countryArray.sort((a, b) => a.value.localeCompare(b.value)) // sort array alphabetically by value
+      setSuggestionCountry(countryArray)
+        }) 
     }
     fetchData().catch(console.error)
   }, [])
@@ -132,9 +138,9 @@ const Game = () => {
     
     <div>
     <Container>
-    <Button style={{marginTop: 5}} onClick={handleClick}>Start</Button>
+    <Button className='startButton' style={{marginTop: 5}} onClick={handleClick}>Start</Button>
     <Fact data={data}></Fact>
-    <Select styles={customStyles} options={suggestionCountry}  onChange={handleUserInput} placeholder="Enter country"></Select>
+    <Select className='textbox' styles={customStyles} options={suggestionCountry}  onChange={handleUserInput} placeholder="Enter country"></Select>
     <Button styles={buttonStyle} onClick={checkCorrect}>Submit</Button>
     
     <WinStreakDisplay winstreakCounter={winstreakCounter}></WinStreakDisplay>

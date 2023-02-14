@@ -1,4 +1,6 @@
 # [Game found here](https://tatervala.github.io/countryGuesser/)
+## REST Country guessing game made using React and [RestCountries API](https://restcountries.com/)
+## /info route currently not working due to gh-pages routing issues. 
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
